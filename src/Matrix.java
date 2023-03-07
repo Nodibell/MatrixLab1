@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Matrix {
@@ -42,9 +41,9 @@ public class Matrix {
 
     Matrix() {
         System.out.print("Введіть кількість рядків матриці: ");
-        setRows(checkSize(rows));
+        setRows(checkSize());
         System.out.print("Введіть кількість стовпців матриці: ");
-        setColumns(checkSize(columns));
+        setColumns(checkSize());
 
         // Створюємо двовимірний масив з введеною розмірністю
         matrix = new int[rows][columns];
@@ -67,9 +66,9 @@ public class Matrix {
         setMatrix(matrix);
     }
 
-    private int checkSize(int size) {
+    private int checkSize() {
         while (true) {
-            size = scanner.nextInt();
+            int size = scanner.nextInt();
             if (size > 0) {
                 scanner = new Scanner(System.in);
                 return size;
@@ -135,6 +134,16 @@ public class Matrix {
             System.out.println("Матриці A(n,m) B(n,m) невідповідають умовам: A(m) != B(n).");
             return new Matrix(new int[1][1]);
         }
+    }
+
+    public Matrix transpose() {
+        resultMatrix = new int[getColumns()][getRows()];
+        for (int i = 0; i < getRows(); i++) {
+            for (int j = 0; j < getColumns(); j++) {
+                resultMatrix[j][i] = matrix[i][j];
+            }
+        }
+        return new Matrix(resultMatrix);
     }
 
 

@@ -12,11 +12,15 @@ public class Main {
         Matrix resultMatrix;
 
         while (true) {
-            System.out.println("Дії:" +
-                    "\n 0 - завершити роботу програми;" +
-                    "\n 1 - додавання/віднімання матриць(однакові розмірності A і B);" +
-                    "\n 2 - множення матриці на коефіцієнт;" +
-                    "\n 3 - множення матриць(к-сть стовпців(m) А = к-сті рядків(n) B);");
+            System.out.println("""
+                    Дії:
+                     0 - завершити роботу програми;
+                     1 - додавання/віднімання матриць(однакові розмірності A і B);
+                     2 - множення матриці на коефіцієнт;
+                     3 - множення матриць(к-сть стовпців(m) А = к-сті рядків(n) B);
+                     4 - транспонування матриці;
+                     5 - знаходження оберненої матриці.""");
+
             System.out.print("Що будем робити? - ");
             action = scanner.nextInt();
             switch (action) {
@@ -28,12 +32,10 @@ public class Main {
                     System.out.println("Матриця А:");
                     matrixA = new Matrix();
                     matrixA.print();
-                    scanner = new Scanner(System.in);
 
                     System.out.println("Матриця B:");
                     matrixB = new Matrix();
                     matrixB.print();
-                    scanner = new Scanner(System.in);
 
                     System.out.print("Яку операцію виконати(+ або -)? - ");
                     op = scanner.next().charAt(0);
@@ -70,18 +72,25 @@ public class Main {
                     System.out.println("Матриця А:");
                     matrixA = new Matrix();
                     matrixA.print();
-                    scanner = new Scanner(System.in);
 
                     System.out.println("Матриця B:");
                     matrixB = new Matrix();
                     matrixB.print();
-                    scanner = new Scanner(System.in);
 
                     System.out.println("Результат множення:");
                     resultMatrix = matrixA.multiply(matrixB);
                     resultMatrix.print();
                     break;
 
+                case (4):
+                    System.out.println("Матриця:");
+                    matrixA = new Matrix();
+                    matrixA.print();
+
+                    System.out.println("Транспонування:");
+                    resultMatrix = matrixA.transpose();
+                    resultMatrix.print();
+                    break;
                 default:
                     System.out.print("Така дія не може бути виконана!");
             }
