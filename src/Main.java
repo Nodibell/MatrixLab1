@@ -7,6 +7,7 @@ public class Main {
         int action;
         char op;
         double k;
+        double detMatrix;
         Matrix matrixA;
         Matrix matrixB;
         Matrix resultMatrix;
@@ -19,7 +20,8 @@ public class Main {
                      2 - множення матриці на коефіцієнт;
                      3 - множення матриць(к-сть стовпців(m) А = к-сті рядків(n) B);
                      4 - транспонування матриці;
-                     5 - знаходження оберненої матриці.""");
+                     5 - знаходження оберненої матриці(к-сті рядків(n) = к-сть стовпців(m), якщо det != 0).
+                     6 - детермінант матриці(opt)""");
 
             System.out.print("Що будем робити? - ");
             action = scanner.nextInt();
@@ -91,6 +93,44 @@ public class Main {
                     resultMatrix = matrixA.transpose();
                     resultMatrix.print();
                     break;
+                /*
+
+                case (5):
+                    System.out.println("Матриця:");
+                    matrixA = new Matrix();
+                    matrixA.print();
+
+                    if (matrixA.getRows() == matrixA.getColumns()) {
+                        detMatrix = matrixA.determinant();
+                        System.out.println("Детермінант: " + detMatrix);
+
+                        if (detMatrix != 0) {
+                            resultMatrix = matrixA.inverseMatrix(detMatrix);
+                            System.out.println("Обернення:");
+                            resultMatrix.print();
+                        } else {
+                            System.out.println("Матриця не має оберненої: det == 0");
+                        }
+                    } else {
+                        System.out.println("Матриця не відповідає умовам: n == m.");
+                    }
+                    break;
+
+                 */
+
+                case (6):
+                    System.out.println("Матриця:");
+                    matrixA = new Matrix();
+                    matrixA.print();
+
+                    if (matrixA.getRows() == matrixA.getColumns()) {
+                        detMatrix = matrixA.determinant();
+                        System.out.println("Детермінант: " + detMatrix);
+                    } else {
+                        System.out.println("Матриця не відповідає умовам: n == m.");
+                    }
+                    break;
+
                 default:
                     System.out.print("Така дія не може бути виконана!");
             }
