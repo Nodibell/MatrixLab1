@@ -7,6 +7,7 @@ public class Matrix {
     private int rows = 0;
     private int columns = 0;
     static Scanner scanner = new Scanner(System.in);
+
     public int[][] getResultMatrix() {
         return resultMatrix;
     }
@@ -14,6 +15,7 @@ public class Matrix {
     public void setResultMatrix(int[][] resultMatrix) {
         this.resultMatrix = resultMatrix;
     }
+
     public int[][] getMatrix() {
         return matrix;
     }
@@ -91,6 +93,31 @@ public class Matrix {
             System.out.println("Матриці мають різні розмірності.");
             return new Matrix(new int[1][1]);
         }
+    }
+
+    public Matrix subtract(Matrix B) {
+        if ((getRows() == B.getRows()) && (getColumns() == B.getColumns())) {
+            setResultMatrix(new int[getRows()][getColumns()]);
+            for (int i = 0; i < getRows(); i++) {
+                for (int j = 0; j < getColumns(); j++) {
+                    resultMatrix[i][j] = getMatrix()[i][j] - B.getMatrix()[i][j];
+                }
+            }
+            return new Matrix(getResultMatrix());
+        } else {
+            System.out.println("Матриці мають різні розмірності.");
+            return new Matrix(new int[1][1]);
+        }
+    }
+
+    public Matrix multiply(double k) {
+        resultMatrix = new int[rows][columns];
+        for (int i = 0; i < getRows(); i++) {
+            for (int j = 0; j < getColumns(); j++) {
+                resultMatrix[i][j] += matrix[i][j] * k;
+            }
+        }
+        return new Matrix(resultMatrix);
     }
 
     public Matrix multiply(Matrix B) {
