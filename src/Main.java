@@ -26,19 +26,17 @@ public class Main {
             System.out.print("Що будем робити? - ");
             action = scanner.nextInt();
             switch (action) {
-                case (0):
+                case (0) -> {
                     System.out.println("Завершую роботу програми!");
                     return;
-
-                case (1):
+                }
+                case (1) -> {
                     System.out.println("Матриця А:");
                     matrixA = new Matrix();
                     matrixA.print();
-
                     System.out.println("Матриця B:");
                     matrixB = new Matrix();
                     matrixB.print();
-
                     System.out.print("Яку операцію виконати(+ або -)? - ");
                     op = scanner.next().charAt(0);
                     while (true) {
@@ -56,43 +54,37 @@ public class Main {
                             System.out.println("Операція не може бути виконана, або її не існує.");
                         }
                     }
-
-                case (2):
+                }
+                case (2) -> {
                     System.out.println("Матриця:");
                     matrixA = new Matrix();
                     matrixA.print();
                     scanner = new Scanner(System.in);
-
                     System.out.print("Введіть коефіцієнт:");
                     k = scanner.nextDouble();
                     System.out.println("Результат множення:");
                     resultMatrix = matrixA.multiply(k);
                     resultMatrix.print();
-                    break;
-
-                case (3):
+                }
+                case (3) -> {
                     System.out.println("Матриця А:");
                     matrixA = new Matrix();
                     matrixA.print();
-
                     System.out.println("Матриця B:");
                     matrixB = new Matrix();
                     matrixB.print();
-
                     System.out.println("Результат множення:");
                     resultMatrix = matrixA.multiply(matrixB);
                     resultMatrix.print();
-                    break;
-
-                case (4):
+                }
+                case (4) -> {
                     System.out.println("Матриця:");
                     matrixA = new Matrix();
                     matrixA.print();
-
                     System.out.println("Транспонування:");
                     resultMatrix = matrixA.transpose();
                     resultMatrix.print();
-                    break;
+                }
                 /*
 
                 case (5):
@@ -118,21 +110,18 @@ public class Main {
 
                  */
 
-                case (6):
+                case (6) -> {
                     System.out.println("Матриця:");
                     matrixA = new Matrix();
                     matrixA.print();
-
                     if (matrixA.getRows() == matrixA.getColumns()) {
                         detMatrix = matrixA.determinant();
                         System.out.println("Детермінант: " + detMatrix);
                     } else {
                         System.out.println("Матриця не відповідає умовам: n == m.");
                     }
-                    break;
-
-                default:
-                    System.out.print("Така дія не може бути виконана!");
+                }
+                default -> System.out.print("Така дія не може бути виконана!");
             }
         }
     }
