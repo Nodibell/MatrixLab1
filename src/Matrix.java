@@ -44,9 +44,7 @@ public class Matrix {
         setRows(inputSize());
         System.out.print("Введіть кількість стовпців матриці: ");
         setColumns(inputSize());
-
-        // Створюємо двовимірний масив з введеною розмірністю
-        matrix = new double[rows][columns];
+        matrix = new double[rows][columns]; // Створюємо двовимірний масив з введеною розмірністю
 
         // Заповнюємо матрицю елементами, введеними з клавіатури
         System.out.println("Введіть елементи матриці: ");
@@ -77,7 +75,6 @@ public class Matrix {
             }
         }
     }
-
 
     public Matrix add(Matrix B) { // метод додавання матриць
         if ((getRows() == B.getRows()) && (getColumns() == B.getColumns())) {
@@ -162,7 +159,6 @@ public class Matrix {
             }
             minorRow++;
         }
-
         return new Matrix(minor);
     }
 
@@ -200,13 +196,10 @@ public class Matrix {
                 inverse[j][i] = sign * minor.determinant() / determinant;
             }
         }
-
         return new Matrix(inverse);
     }
 
-
-    public void print() {
-        // Виводимо матрицю на екран
+    public void print() { // Виводимо матрицю на екран
         System.out.println("Матриця:");
         for (int i = 0; i < getRows(); i++) {
             for (int j = 0; j < getColumns(); j++) {

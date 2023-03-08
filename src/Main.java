@@ -63,7 +63,7 @@ public class Main {
                     matrixA = new Matrix();
                     matrixA.print();
                     scanner = new Scanner(System.in);
-                    System.out.print("Введіть коефіцієнт:");
+                    System.out.print("Введіть коефіцієнт: ");
                     k = scanner.nextDouble();
                     System.out.println("Результат множення:");
                     resultMatrix = matrixA.multiply(k);
@@ -103,7 +103,7 @@ public class Main {
                             System.out.println("Обернення:");
                             resultMatrix.print();
                         } else {
-                            System.out.println("Матриця не має оберненої: det == 0");
+                            System.out.println("Матриця не має оберненої: det == 0.");
                         }
                     } else {
                         System.out.println("Матриця не відповідає умовам: n == m.");
