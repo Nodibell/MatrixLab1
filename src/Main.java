@@ -34,12 +34,15 @@ public class Main {
                     System.out.println("Матриця А:");
                     matrixA = new Matrix();
                     matrixA.print();
+
                     System.out.println("Матриця B:");
                     matrixB = new Matrix();
                     matrixB.print();
-                    System.out.print("Яку операцію виконати(+ або -)? - ");
-                    op = scanner.next().charAt(0);
+
                     while (true) {
+                        System.out.print("Яку операцію виконати(+ або -)? - ");
+                        op = scanner.next().charAt(0);
+
                         if (op == '+') {
                             System.out.println("Результат додавання:");
                             resultMatrix = matrixA.add(matrixB);
