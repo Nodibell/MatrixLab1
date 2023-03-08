@@ -39,7 +39,7 @@ public class Matrix {
         this.columns = columns;
     }
 
-    Matrix() {
+    Matrix() { // конструктор для класу Matrix
         System.out.print("Введіть кількість рядків матриці: ");
         setRows(inputSize());
         System.out.print("Введіть кількість стовпців матриці: ");
@@ -49,10 +49,10 @@ public class Matrix {
         matrix = new double[rows][columns];
 
         // Заповнюємо матрицю елементами, введеними з клавіатури
-        System.out.println("Введіть елементи матриці:");
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                System.out.print("Введіть елемент матриці (" + (i + 1) + ":" + (j + 1) + "):");
+        System.out.println("Введіть елементи матриці: ");
+        for (int i = 0; i < getRows(); i++) {
+            for (int j = 0; j < getColumns(); j++) {
+                System.out.print("Введіть елемент матриці(" + (i + 1) + ":" + (j + 1) + "): ");
                 matrix[i][j] = scanner.nextDouble();
             }
         }
@@ -60,13 +60,13 @@ public class Matrix {
         setMatrix(matrix);
     }
 
-    Matrix(double[][] matrix) {
+    Matrix(double[][] matrix) { // конструктор для класу Matrix з вхідним двовимірним масивом
         setRows(matrix.length);
         setColumns(matrix[0].length);
         setMatrix(matrix);
     }
 
-    private int inputSize() {
+    private int inputSize() { // отримує, перевіряє, і записує розмірність матриці при конструкторі
         while (true) {
             int size = scanner.nextInt();
             if (size > 0) {
@@ -79,7 +79,7 @@ public class Matrix {
     }
 
 
-    public Matrix add(Matrix B) {
+    public Matrix add(Matrix B) { // метод додавання матриць
         if ((getRows() == B.getRows()) && (getColumns() == B.getColumns())) {
             setResultMatrix(new double[getRows()][getColumns()]);
             for (int i = 0; i < getRows(); i++) {
@@ -94,7 +94,7 @@ public class Matrix {
         }
     }
 
-    public Matrix subtract(Matrix B) {
+    public Matrix subtract(Matrix B) { // метод віднімання матриць
         if ((getRows() == B.getRows()) && (getColumns() == B.getColumns())) {
             setResultMatrix(new double[getRows()][getColumns()]);
             for (int i = 0; i < getRows(); i++) {
@@ -109,7 +109,7 @@ public class Matrix {
         }
     }
 
-    public Matrix multiply(double k) {
+    public Matrix multiply(double k) { // метод для множення матриці на число
         resultMatrix = new double[rows][columns];
         for (int i = 0; i < getRows(); i++) {
             for (int j = 0; j < getColumns(); j++) {
@@ -119,7 +119,7 @@ public class Matrix {
         return new Matrix(resultMatrix);
     }
 
-    public Matrix multiply(Matrix B) {
+    public Matrix multiply(Matrix B) { // метод для множення матриці на матрицю
         if (getColumns() == B.getRows()) {
             resultMatrix = new double[getRows()][B.getColumns()];
             for (int i = 0; i < getRows(); i++) {
@@ -136,7 +136,7 @@ public class Matrix {
         }
     }
 
-    public Matrix transpose() {
+    public Matrix transpose() { // метод для транспонування матриці
         resultMatrix = new double[getColumns()][getRows()];
         for (int i = 0; i < getRows(); i++) {
             for (int j = 0; j < getColumns(); j++) {
@@ -146,41 +146,71 @@ public class Matrix {
         return new Matrix(resultMatrix);
     }
 
-    public double determinant() { // знаходження детермінанта методом Гаусса-Жордана
-        double detMatrix = 1;
+    public Matrix findMinorMatrix(int row, int column) { // метод для знаходження мінору відповідного i,j
+        double[][] minor = new double[getRows() - 1][getColumns() - 1];
+
+        int minorRow = 0;
         for (int i = 0; i < getRows(); i++) {
-            int maxRow = i;
-            for (int j = i + 1; j < getRows(); j++) {
-                if (Math.abs(matrix[j][i]) > Math.abs(matrix[maxRow][i])) {
-                    maxRow = j;
-                }
+            if (i == row) continue;
+
+            int minorColumn = 0;
+            for (int j = 0; j < getColumns(); j++) {
+                if (j == column) continue;
+
+                minor[minorRow][minorColumn] = getMatrix()[i][j];
+                minorColumn++;
             }
-            if (i != maxRow) {
-                double[] temp = matrix[i];
-                matrix[i] = matrix[maxRow];
-                matrix[maxRow] = temp;
-                detMatrix *= -1;
-            }
-            if (matrix[i][i] == 0) {
-                return 0;
-            }
-            detMatrix *= matrix[i][i];
-            for (int j = i + 1; j < getRows(); j++) {
-                double factor = matrix[j][i] / matrix[i][i];
-                for (int k = i + 1; k < getRows(); k++) {
-                    matrix[j][k] -= factor * matrix[i][k];
-                }
+            minorRow++;
+        }
+
+        return new Matrix(minor);
+    }
+
+
+    public double determinant() { // метод для знаходження детермінанту
+        double determinant = 0;
+
+        if (getRows() == 1) { // якщо розмірність матриці 1х1
+            determinant = getMatrix()[0][0];
+        } else if (getRows() == 2) { // якщо розмірність матриці 2х2
+            determinant = (getMatrix()[0][0] * getMatrix()[1][1]) - (getMatrix()[0][1] * getMatrix()[1][0]);
+        } else { // для будь-яких інших розмірностей
+            for (int i = 0; i < getRows(); i++) {
+                Matrix minor = findMinorMatrix(0, i);
+                int sign = (i % 2 == 0) ? 1 : -1;
+                determinant += sign * getMatrix()[0][i] * minor.determinant();
             }
         }
-        return detMatrix;
+        return determinant;
     }
+
+    public Matrix inverse() { // метод для знаходження оберненої матриці
+        double determinant = determinant();
+
+        if (determinant == 0) {
+            return new Matrix(new double[1][1]); // матриця не має оберненої матриці
+        }
+
+        double[][] inverse = new double[getRows()][getColumns()];
+
+        for (int i = 0; i < getRows(); i++) {
+            for (int j = 0; j < getColumns(); j++) {
+                Matrix minor = findMinorMatrix(i, j);
+                int sign = ((i + j) % 2 == 0) ? 1 : -1;
+                inverse[j][i] = sign * minor.determinant() / determinant;
+            }
+        }
+
+        return new Matrix(inverse);
+    }
+
 
     public void print() {
         // Виводимо матрицю на екран
         System.out.println("Матриця:");
         for (int i = 0; i < getRows(); i++) {
             for (int j = 0; j < getColumns(); j++) {
-                System.out.print(matrix[i][j] + " ");
+                System.out.print(getMatrix()[i][j] + " ");
             }
             System.out.println();
         }

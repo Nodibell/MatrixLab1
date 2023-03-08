@@ -26,11 +26,11 @@ public class Main {
             System.out.print("Що будем робити? - ");
             action = scanner.nextInt();
             switch (action) {
-                case (0) -> {
+                case (0) -> { //завершення роботи програми
                     System.out.println("Завершую роботу програми!");
                     return;
                 }
-                case (1) -> {
+                case (1) -> { // додавання і віднімання матриць
                     System.out.println("Матриця А:");
                     matrixA = new Matrix();
                     matrixA.print();
@@ -58,7 +58,7 @@ public class Main {
                         }
                     }
                 }
-                case (2) -> {
+                case (2) -> { // множення матриці на коефіцієнт(число)
                     System.out.println("Матриця:");
                     matrixA = new Matrix();
                     matrixA.print();
@@ -69,7 +69,7 @@ public class Main {
                     resultMatrix = matrixA.multiply(k);
                     resultMatrix.print();
                 }
-                case (3) -> {
+                case (3) -> { // множення матриць
                     System.out.println("Матриця А:");
                     matrixA = new Matrix();
                     matrixA.print();
@@ -80,7 +80,7 @@ public class Main {
                     resultMatrix = matrixA.multiply(matrixB);
                     resultMatrix.print();
                 }
-                case (4) -> {
+                case (4) -> {// транспонування матриці
                     System.out.println("Матриця:");
                     matrixA = new Matrix();
                     matrixA.print();
@@ -88,9 +88,8 @@ public class Main {
                     resultMatrix = matrixA.transpose();
                     resultMatrix.print();
                 }
-                /*
 
-                case (5):
+                case (5) -> { // знаходження оберненої матриці
                     System.out.println("Матриця:");
                     matrixA = new Matrix();
                     matrixA.print();
@@ -100,7 +99,7 @@ public class Main {
                         System.out.println("Детермінант: " + detMatrix);
 
                         if (detMatrix != 0) {
-                            resultMatrix = matrixA.inverseMatrix(detMatrix);
+                            resultMatrix = matrixA.inverse();
                             System.out.println("Обернення:");
                             resultMatrix.print();
                         } else {
@@ -109,11 +108,9 @@ public class Main {
                     } else {
                         System.out.println("Матриця не відповідає умовам: n == m.");
                     }
-                    break;
+                }
 
-                 */
-
-                case (6) -> {
+                case (6) -> { // знаходження детермінта матриці
                     System.out.println("Матриця:");
                     matrixA = new Matrix();
                     matrixA.print();
