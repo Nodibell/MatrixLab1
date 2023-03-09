@@ -20,8 +20,7 @@ public class Main {
                      2 - множення матриці на коефіцієнт;
                      3 - множення матриць(к-сть стовпців(m) А = к-сті рядків(n) B);
                      4 - транспонування матриці;
-                     5 - знаходження оберненої матриці(к-сті рядків(n) = к-сть стовпців(m), якщо det != 0).
-                     6 - детермінант матриці(opt)""");
+                     5 - знаходження оберненої матриці(к-сті рядків(n) = к-сть стовпців(m), якщо det != 0).""");
 
             System.out.print("Що будем робити? - ");
             action = scanner.nextInt();
@@ -110,17 +109,6 @@ public class Main {
                     }
                 }
 
-                case (6) -> { // знаходження детермінта матриці
-                    System.out.println("Матриця:");
-                    matrixA = new Matrix();
-                    matrixA.print();
-                    if (matrixA.getRows() == matrixA.getColumns()) {
-                        detMatrix = matrixA.determinant();
-                        System.out.println("Детермінант: " + detMatrix);
-                    } else {
-                        System.out.println("Матриця не відповідає умовам: n == m.");
-                    }
-                }
                 default -> System.out.print("Така дія не може бути виконана!");
             }
         }
