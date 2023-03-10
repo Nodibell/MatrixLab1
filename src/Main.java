@@ -109,7 +109,7 @@ public class Main {
                     }
                 }
 
-                default -> System.out.print("Така дія не може бути виконана!");
+                default -> System.out.println("Така дія не може бути виконана!");
             }
         }
     }
