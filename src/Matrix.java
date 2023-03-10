@@ -78,7 +78,7 @@ public class Matrix {
             return new Matrix(resultMatrix);
         } else {
             System.out.println("Матриці мають різні розмірності.");
-            return new Matrix(new double[1][1]);
+            return new Matrix(new double[0][0]);
         }
     }
 
@@ -93,7 +93,7 @@ public class Matrix {
             return new Matrix(resultMatrix);
         } else {
             System.out.println("Матриці мають різні розмірності.");
-            return new Matrix(new double[1][1]);
+            return new Matrix(new double[0][0]);
         }
     }
 
@@ -120,7 +120,7 @@ public class Matrix {
             return new Matrix(resultMatrix);
         } else {
             System.out.println("Матриці A(n,m) B(n,m) невідповідають умовам: A(m) != B(n).");
-            return new Matrix(new double[1][1]);
+            return new Matrix(new double[0][0]);
         }
     }
 
@@ -128,7 +128,7 @@ public class Matrix {
         double[][] resultMatrix = new double[getColumns()][getRows()];
         for (int i = 0; i < getRows(); i++) {
             for (int j = 0; j < getColumns(); j++) {
-                resultMatrix[j][i] = matrix[i][j];
+                resultMatrix[j][i] = getMatrix()[i][j];
             }
         }
         return new Matrix(resultMatrix);
