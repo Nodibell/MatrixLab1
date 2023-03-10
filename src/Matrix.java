@@ -2,18 +2,9 @@ import java.util.Scanner;
 
 public class Matrix {
     private double[][] matrix;
-    private double[][] resultMatrix = new double[1][1];
     private int rows = 0;
     private int columns = 0;
     static Scanner scanner = new Scanner(System.in);
-
-    public double[][] getResultMatrix() {
-        return resultMatrix;
-    }
-
-    public void setResultMatrix(double[][] resultMatrix) {
-        this.resultMatrix = resultMatrix;
-    }
 
     public double[][] getMatrix() {
         return matrix;
@@ -78,13 +69,13 @@ public class Matrix {
 
     public Matrix add(Matrix B) { // метод додавання матриць
         if ((getRows() == B.getRows()) && (getColumns() == B.getColumns())) {
-            setResultMatrix(new double[getRows()][getColumns()]);
+            double[][] resultMatrix = new double[getRows()][getColumns()];
             for (int i = 0; i < getRows(); i++) {
                 for (int j = 0; j < getColumns(); j++) {
                     resultMatrix[i][j] = getMatrix()[i][j] + B.getMatrix()[i][j];
                 }
             }
-            return new Matrix(getResultMatrix());
+            return new Matrix(resultMatrix);
         } else {
             System.out.println("Матриці мають різні розмірності.");
             return new Matrix(new double[1][1]);
@@ -93,13 +84,13 @@ public class Matrix {
 
     public Matrix subtract(Matrix B) { // метод віднімання матриць
         if ((getRows() == B.getRows()) && (getColumns() == B.getColumns())) {
-            setResultMatrix(new double[getRows()][getColumns()]);
+            double[][] resultMatrix = new double[getRows()][getColumns()];
             for (int i = 0; i < getRows(); i++) {
                 for (int j = 0; j < getColumns(); j++) {
                     resultMatrix[i][j] = getMatrix()[i][j] - B.getMatrix()[i][j];
                 }
             }
-            return new Matrix(getResultMatrix());
+            return new Matrix(resultMatrix);
         } else {
             System.out.println("Матриці мають різні розмірності.");
             return new Matrix(new double[1][1]);
@@ -107,7 +98,7 @@ public class Matrix {
     }
 
     public Matrix multiply(double k) { // метод для множення матриці на число
-        resultMatrix = new double[rows][columns];
+        double[][] resultMatrix = new double[rows][columns];
         for (int i = 0; i < getRows(); i++) {
             for (int j = 0; j < getColumns(); j++) {
                 resultMatrix[i][j] += getMatrix()[i][j] * k;
@@ -118,7 +109,7 @@ public class Matrix {
 
     public Matrix multiply(Matrix B) { // метод для множення матриці на матрицю
         if (getColumns() == B.getRows()) {
-            resultMatrix = new double[getRows()][B.getColumns()];
+            double[][] resultMatrix = new double[getRows()][B.getColumns()];
             for (int i = 0; i < getRows(); i++) {
                 for (int j = 0; j < B.getColumns(); j++) {
                     for (int k = 0; k < getColumns(); k++) {
@@ -134,7 +125,7 @@ public class Matrix {
     }
 
     public Matrix transpose() { // метод для транспонування матриці
-        resultMatrix = new double[getColumns()][getRows()];
+        double[][] resultMatrix = new double[getColumns()][getRows()];
         for (int i = 0; i < getRows(); i++) {
             for (int j = 0; j < getColumns(); j++) {
                 resultMatrix[j][i] = matrix[i][j];
